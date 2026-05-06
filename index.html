@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luiz Fernando - Portfólio de Engenharia</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fontes e Estilos Personalizados -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        
+        .font-vintage { font-family: 'Playfair Display', serif; }
+        .font-classic { font-family: 'Lora', serif; }
+
+        /* Custom Scrollbar for text areas */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(39, 39, 42, 0.5);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.5);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.8);
+        }
+
+        /* Smooth scroll para a página inteira */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-[#050505] font-classic text-slate-100 relative overflow-x-hidden">
+
+    <!-- Background Global (Fundo Técnico) -->
+    <div class="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+    <div class="fixed top-0 left-[10%] w-[50%] h-[50%] rounded-full bg-amber-500/5 blur-[150px] pointer-events-none z-0"></div>
+
+    <!-- NAVEGAÇÃO SUPERIOR -->
+    <nav class="fixed top-0 w-full z-50 bg-[#050505]/90 backdrop-blur-md border-b border-zinc-800/80 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8 py-3 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 border border-amber-400/80 flex shrink-0 items-center justify-center font-vintage font-bold text-amber-400 text-sm shadow-[0_0_10px_rgba(245,158,11,0.2)]">LF</div>
+                <span class="text-xs font-classic tracking-[0.2em] text-slate-300 uppercase font-bold" data-i18n="nav_title">Engenharia Mecânica</span>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+                <ul class="flex flex-wrap justify-center gap-4 sm:gap-8 text-[10px] sm:text-xs font-classic tracking-widest uppercase font-bold text-slate-400">
+                    <li><a href="#inicio" class="hover:text-amber-400 transition-colors" data-i18n="nav_home">Início</a></li>
+                    <li><a href="#sobre" class="hover:text-amber-400 transition-colors" data-i18n="nav_about">Sobre</a></li>
+                    <li><a href="#qualificacoes" class="hover:text-amber-400 transition-colors" data-i18n="nav_qual">Qualificações</a></li>
+                    <li><a href="#projetos" class="hover:text-amber-400 transition-colors" data-i18n="nav_proj">Projetos</a></li>
+                    <li><a href="#contato" class="hover:text-amber-400 transition-colors" data-i18n="nav_contact">Contato</a></li>
+                </ul>
+
+                <!-- Language Switcher -->
+                <div class="flex bg-zinc-900 border border-zinc-800 rounded-full p-1 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                    <button onclick="setLanguage('pt')" class="lang-btn pt-btn active px-3 py-1 text-[10px] font-bold rounded-full text-amber-400 bg-zinc-800 transition-all">PT</button>
+                    <button onclick="setLanguage('en')" class="lang-btn en-btn px-3 py-1 text-[10px] font-bold rounded-full text-slate-400 hover:text-slate-200 transition-all">EN</button>
+                    <button onclick="setLanguage('es')" class="lang-btn es-btn px-3 py-1 text-[10px] font-bold rounded-full text-slate-400 hover:text-slate-200 transition-all">ES</button>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500/80 to-transparent shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+    </nav>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <main class="relative z-10 w-full flex flex-col">
+
+        <!-- SEÇÃO 1: INÍCIO (HERO FULL-SCREEN) -->
+        <section id="inicio" class="w-full min-h-[100vh] flex flex-col justify-center items-center relative pt-24 pb-12 px-4 sm:px-8">
+            <div class="flex flex-col justify-center items-center text-center relative z-10 w-full max-w-5xl mx-auto">
+                <div class="relative mb-8 sm:mb-12 group">
+                    <div class="absolute inset-[-6px] rounded-full border border-amber-500/40 opacity-80 animate-pulse"></div>
+                    <div id="profile-pic-container" class="w-36 h-36 sm:w-48 sm:h-48 rounded-full bg-zinc-900 border-2 border-amber-400/80 flex flex-col items-center justify-center overflow-hidden relative shadow-[0_0_50px_rgba(245,158,11,0.2)] transition-colors duration-500">
+                        <i data-lucide="user" class="w-12 h-12 text-slate-400 mb-2"></i>
+                        <span class="text-[9px] font-classic uppercase tracking-widest text-slate-300 font-bold text-center px-2" data-i18n="hero_photo">Sua Foto</span>
+                    </div>
+                </div>
+                
+                <h1 class="font-vintage text-5xl sm:text-7xl lg:text-[6rem] leading-[1.1] text-white tracking-wide uppercase drop-shadow-2xl">Luiz Fernando</h1>
+                <h1 class="font-vintage text-4xl sm:text-6xl lg:text-[4.5rem] leading-[1] text-amber-500 font-bold tracking-wide uppercase mb-10 drop-shadow-lg">Duarte Santos</h1>
+                
+                <div class="flex items-center gap-3 sm:gap-6 mb-12 w-full justify-center">
+                    <div class="h-px w-12 sm:w-24 bg-gradient-to-l from-amber-500/60 to-transparent"></div>
+                    <h2 class="font-classic text-xl sm:text-2xl text-slate-200 italic tracking-[0.2em] font-medium text-center" data-i18n="hero_role">Engenheiro Mecânico</h2>
+                    <div class="h-px w-12 sm:w-24 bg-gradient-to-r from-amber-500/60 to-transparent"></div>
+                </div>
+                
+                <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 border border-zinc-800 bg-zinc-900/30 backdrop-blur-sm px-6 py-3 rounded-full">
+                    <span class="text-xs sm:text-sm font-classic tracking-widest text-slate-300 uppercase font-bold" data-i18n="hero_reg">Registro Profissional</span>
+                    <span class="hidden sm:block w-1.5 h-1.5 rotate-45 border border-amber-400 bg-amber-400/20"></span>
+                    <span class="text-xs sm:text-sm font-classic tracking-widest text-amber-400 uppercase font-bold">CREA: PR-237833/D</span>
+                </div>
+            </div>
+            
+            <!-- Mouse Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+                <span class="text-[10px] uppercase tracking-widest font-bold" data-i18n="hero_scroll">Role para baixo</span>
+                <div class="w-5 h-8 border-2 border-slate-400 rounded-full flex justify-center pt-1">
+                    <div class="w-1 h-2 bg-amber-400 rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: SOBRE / SÍNTESE -->
+        <section id="sobre" class="w-full border-t border-amber-500/40 shadow-[inset_0_1px_20px_rgba(245,158,11,0.1)] bg-[#080808] py-24 px-6 sm:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center sm:text-left mb-16 flex flex-col items-center sm:items-start">
+                    <h2 class="text-3xl sm:text-4xl font-vintage font-bold text-white mb-4 tracking-wide uppercase" data-i18n="about_title">Síntese Profissional</h2>
+                    <div class="w-20 h-[2px] bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.6)]"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 relative">
+                    <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-amber-500/40 to-transparent -translate-x-1/2"></div>
+                    <div>
+                        <p class="font-classic text-base text-slate-300 leading-relaxed text-justify mb-6 indent-8" data-i18n="about_p1">
+                            <span class="text-amber-400 font-vintage text-4xl float-left mr-2 leading-none mt-1">E</span>ngenheiro Mecânico formado pela UniCuritiba e pós-graduando em Engenharia da Qualidade 4.0 pela Universidade Federal do Paraná (UFPR). Com trajetória consolidada no desenvolvimento e gestão de projetos desde 2021, possuo experiência multissetorial na entrega de soluções de engenharia de alta complexidade.
+                        </p>
+                        <p class="font-classic text-base text-slate-300 leading-relaxed text-justify indent-8" data-i18n="about_p2">
+                            No setor moveleiro, atuei na viabilização técnica e produtiva de mobiliário corporativo de alto padrão, atendendo a rigorosos critérios de qualidade para marcas de grande expressão nacional, como Madero, Bob’s e Coco Bambu.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="font-classic text-base text-slate-300 leading-relaxed text-justify mb-6 indent-8" data-i18n="about_p3">
+                            Atualmente, minha atuação está concentrada no setor metalmecânico, onde sou responsável pelo desenvolvimento e viabilização de componentes que envolvem processos de corte a laser, dobra e usinagem. Desenvolvo projetos técnicos para organizações líderes em seus segmentos, como Volvo, Horsch e Petrobras.
+                        </p>
+                        <p class="font-classic text-base text-slate-300 leading-relaxed text-justify indent-8" data-i18n="about_p4">
+                            Minha abordagem profissional une o domínio técnico em softwares de modelagem e detalhamento à visão estratégica da Engenharia da Qualidade, focando sempre na otimização de recursos e na excelência técnica dos projetos executados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: QUALIFICAÇÕES -->
+        <section id="qualificacoes" class="w-full border-t border-amber-500/40 shadow-[inset_0_1px_20px_rgba(245,158,11,0.1)] bg-[#050505] py-24 px-6 sm:px-8">
+            <div class="max-w-6xl mx-auto flex flex-col gap-24">
+                
+                <!-- Formação Acadêmica -->
+                <div>
+                    <div class="text-center mb-12 flex flex-col items-center">
+                        <h2 class="text-3xl font-vintage font-bold text-white mb-3 tracking-wide uppercase" data-i18n="qual_edu_title">Formação Acadêmica</h2>
+                        <div class="w-16 h-[2px] bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.6)]"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Card 1 -->
+                        <div class="bg-zinc-900/40 border border-zinc-800 group hover:border-amber-400/50 hover:bg-zinc-900/80 transition-all duration-300 rounded-lg overflow-hidden flex flex-col">
+                            <div id="edu-cep" class="relative w-full h-36 bg-zinc-900/80 border-b border-amber-500/20 flex flex-col items-center justify-center overflow-hidden">
+                                <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors z-10 pointer-events-none"></div>
+                            </div>
+                            <div class="p-6 flex flex-col flex-1 relative z-20 -mt-6 bg-gradient-to-t from-zinc-900 via-zinc-900 to-transparent pt-8">
+                                <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest mb-1" data-i18n="edu_hs_level">Ensino Médio</p>
+                                <h3 class="font-vintage text-xl text-white mb-1" data-i18n="edu_hs_title">Ensino Médio Regular</h3>
+                                <p class="font-classic text-sm text-slate-400 mb-4">Colégio Estadual do Paraná (CEP)</p>
+                                <div class="mt-auto border-t border-zinc-800 pt-4">
+                                    <p class="text-xs text-slate-300 font-classic" data-i18n="edu_hs_status">Status: Concluído em 2020</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-zinc-900/40 border border-zinc-800 group hover:border-amber-400/50 hover:bg-zinc-900/80 transition-all duration-300 rounded-lg overflow-hidden flex flex-col">
+                            <div id="edu-uni" class="relative w-full h-36 bg-zinc-900/80 border-b border-amber-500/20 flex flex-col items-center justify-center overflow-hidden">
+                                <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors z-10 pointer-events-none"></div>
+                            </div>
+                            <div class="p-6 flex flex-col flex-1 relative z-20 -mt-6 bg-gradient-to-t from-zinc-900 via-zinc-900 to-transparent pt-8">
+                                <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest mb-1" data-i18n="edu_ug_level">Graduação</p>
+                                <h3 class="font-vintage text-xl text-white mb-1" data-i18n="edu_ug_title">Engenharia Mecânica</h3>
+                                <p class="font-classic text-sm text-slate-400 mb-4">UNICURITIBA</p>
+                                <div class="mt-auto border-t border-zinc-800 pt-4">
+                                    <p class="text-xs text-slate-300 font-classic" data-i18n="edu_ug_status">Status: Concluído em 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-zinc-900/40 border border-zinc-800 group hover:border-amber-400/50 hover:bg-zinc-900/80 transition-all duration-300 rounded-lg overflow-hidden flex flex-col">
+                            <div id="edu-ufpr" class="relative w-full h-36 bg-zinc-900/80 border-b border-amber-500/20 flex flex-col items-center justify-center overflow-hidden">
+                                <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors z-10 pointer-events-none"></div>
+                            </div>
+                            <div class="p-6 flex flex-col flex-1 relative z-20 -mt-6 bg-gradient-to-t from-zinc-900 via-zinc-900 to-transparent pt-8">
+                                <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest mb-1" data-i18n="edu_pg_level">Pós-Graduação</p>
+                                <h3 class="font-vintage text-xl text-white mb-1" data-i18n="edu_pg_title">Eng. da Qualidade & Black Belt</h3>
+                                <p class="font-classic text-sm text-slate-400 mb-4">Universidade Federal do Paraná (UFPR)</p>
+                                <div class="mt-auto border-t border-zinc-800 pt-4">
+                                    <p class="text-xs text-slate-300 font-classic" data-i18n="edu_pg_status">Status: Em andamento (Prev. 2028)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisor Sutil -->
+                <div class="w-full max-w-4xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-amber-500/80 to-transparent shadow-[0_0_15px_rgba(245,158,11,0.4)]"></div>
+
+                <!-- Cursos Profissionalizantes -->
+                <div>
+                    <div class="text-center mb-12 flex flex-col items-center">
+                        <h2 class="text-3xl font-vintage font-bold text-white mb-3 tracking-wide uppercase" data-i18n="qual_cert_title">Cursos e Especializações</h2>
+                        <div class="w-16 h-[2px] bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.6)] mb-2"></div>
+                        <p class="font-classic text-sm text-slate-400 italic" data-i18n="qual_cert_sub">Domínio de Softwares e Cálculos Estruturais</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="courses-container">
+                        <!-- JS irá preencher isso com base na linguagem -->
+                    </div>
+                </div>
+
+                <!-- Divisor Sutil -->
+                <div class="w-full max-w-4xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-amber-500/80 to-transparent shadow-[0_0_15px_rgba(245,158,11,0.4)]"></div>
+
+                <!-- Idiomas -->
+                <div>
+                    <div class="text-center mb-12 flex flex-col items-center">
+                        <h2 class="text-3xl font-vintage font-bold text-white mb-3 tracking-wide uppercase" data-i18n="qual_lang_title">Idiomas</h2>
+                        <div class="w-16 h-[2px] bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.6)] mb-2"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto" id="langs-container">
+                        <!-- JS irá preencher isso com base na linguagem -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: PROJETOS (LAYOUT Z-PATTERN) -->
+        <section id="projetos" class="w-full border-t border-amber-500/40 shadow-[inset_0_1px_20px_rgba(245,158,11,0.1)] bg-[#080808] py-24 px-6 sm:px-8">
+            <div class="max-w-6xl mx-auto flex flex-col">
+                
+                <!-- Projetos Introdução -->
+                <div class="text-center mb-20 relative z-10">
+                    <div class="inline-flex items-center justify-center p-4 border border-amber-500/20 rounded-full mb-6 bg-zinc-900/30">
+                        <i data-lucide="folder-kanban" class="w-8 h-8 text-amber-400"></i>
+                    </div>
+                    <h2 class="text-4xl sm:text-5xl font-vintage font-bold text-white mb-6 tracking-wide uppercase" data-i18n="proj_title">Portfólio de Projetos</h2>
+                    <div class="w-24 h-[2px] bg-amber-500 mx-auto shadow-[0_0_10px_rgba(245,158,11,0.6)] mb-6"></div>
+                    <p class="font-classic text-base text-slate-300 italic max-w-2xl mx-auto" data-i18n="proj_sub">
+                        Galeria técnica com estudos de caso, detalhamentos e renderizações de projetos desenvolvidos para diferentes setores industriais.
+                    </p>
+                </div>
+
+                <!-- Lista de Projetos -->
+                <div class="flex flex-col gap-24 sm:gap-32">
+                    
+                    <!-- Projeto 01: Mecânicos -->
+                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                        <div class="w-full lg:w-1/2 relative h-[450px] lg:h-[550px] shrink-0">
+                            <div id="mecanicos-main" class="absolute top-0 left-0 w-[70%] h-[45%] z-10 overflow-hidden rounded-md shadow-xl border border-zinc-800 bg-zinc-900 transition-all hover:scale-[1.02]">
+                                <div class="absolute inset-0 bg-zinc-900/40 pointer-events-none"></div>
+                            </div>
+                            <div id="mecanicos-detail1" class="absolute top-[27%] right-0 w-[70%] h-[45%] z-30 overflow-hidden rounded-md shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-amber-500/30 bg-zinc-900 transition-all hover:scale-[1.02]">
+                                <div class="absolute inset-0 bg-zinc-900/20 pointer-events-none"></div>
+                            </div>
+                            <div id="mecanicos-detail2" class="absolute bottom-0 left-5 w-[70%] h-[45%] z-20 overflow-hidden rounded-md shadow-xl border border-zinc-800 bg-zinc-900 transition-all hover:scale-[1.02]">
+                                <div class="absolute inset-0 bg-zinc-900/40 pointer-events-none"></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 flex flex-col justify-center">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 bg-zinc-900 border border-amber-500/40 shrink-0 flex items-center justify-center rounded-sm">
+                                    <i data-lucide="settings" class="w-6 h-6 text-amber-400"></i>
+                                </div>
+                                <h3 class="text-3xl font-vintage font-bold text-white uppercase" data-i18n="proj_mec_title">Projetos Mecânicos</h3>
+                            </div>
+                            <h4 class="text-amber-500 font-classic text-sm uppercase tracking-widest font-bold mb-4" data-i18n="proj_resumo">Resumo Técnico</h4>
+                            <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify mb-6" data-i18n="proj_mec_p1">
+                                Atualmente, meu foco está no desenvolvimento técnico de componentes e na melhoria contínua do chão de fábrica. No dia a dia, projeto peças complexas utilizando softwares de modelagem 3D, garantindo que cada geometria atenda às exigências de esforço e funcionalidade.
+                            </p>
+                            <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify" data-i18n="proj_mec_p2">
+                                Minha vivência vai além do computador: acompanho de perto a produção para identificar gargalos e implementar melhorias nos processos. Trabalho para que o projeto saia do papel de forma otimizada, reduzindo desperdícios e garantindo que a manufatura seja ágil e precisa.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full max-w-2xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-amber-500/80 to-transparent shadow-[0_0_15px_rgba(245,158,11,0.4)]"></div>
+
+                    <!-- Projeto 02: Moveleiros -->
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
+                        <div class="w-full lg:w-1/2 grid grid-cols-2 grid-rows-2 gap-3 h-[450px] lg:h-[550px] shrink-0">
+                            <div id="moveleiros-main" class="col-span-1 row-span-2 overflow-hidden rounded-md shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-amber-500/30 bg-zinc-900 relative transition-all hover:scale-[1.02] z-20">
+                                <div class="absolute inset-0 bg-zinc-900/20 pointer-events-none"></div>
+                            </div>
+                            <div id="moveleiros-detail1" class="col-span-1 row-span-1 overflow-hidden rounded-md shadow-xl border border-zinc-800 bg-zinc-900 relative z-10 transition-all hover:scale-[1.02]">
+                                <div class="absolute inset-0 bg-zinc-900/40 pointer-events-none"></div>
+                            </div>
+                            <div id="moveleiros-detail2" class="col-span-1 row-span-1 overflow-hidden rounded-md shadow-xl border border-zinc-800 bg-zinc-900 relative z-10 transition-all hover:scale-[1.02]">
+                                <div class="absolute inset-0 bg-zinc-900/40 pointer-events-none"></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 flex flex-col justify-center">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 bg-zinc-900 border border-amber-500/40 shrink-0 flex items-center justify-center rounded-sm">
+                                    <i data-lucide="box" class="w-6 h-6 text-amber-400"></i>
+                                </div>
+                                <h3 class="text-3xl font-vintage font-bold text-white uppercase" data-i18n="proj_mov_title">Projetos Moveleiros</h3>
+                            </div>
+                            <h4 class="text-amber-500 font-classic text-sm uppercase tracking-widest font-bold mb-4" data-i18n="proj_resumo">Resumo Técnico</h4>
+                            <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify mb-6" data-i18n="proj_mov_p1">
+                                Neste setor, minha experiência foi pautada pela transformação de conceitos em produtos reais e viáveis. Atuei diretamente no ciclo de desenvolvimento, desde o refinamento do design até a entrega final. 
+                            </p>
+                            <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify" data-i18n="proj_mov_p2">
+                                Minha principal responsabilidade era a prototipagem e a validação técnica: eu acompanhava a construção dos primeiros modelos físicos para testar encaixes, resistência de materiales e facilidade de montagem. Essa vivência prática permitia ajustar detalhes críticos antes da produção em larga escala.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full max-w-2xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-amber-500/80 to-transparent shadow-[0_0_15px_rgba(245,158,11,0.4)]"></div>
+
+                    <!-- Projeto 03: Estruturais -->
+                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                        <div class="w-full lg:w-1/2 grid grid-cols-2 grid-rows-2 gap-3 h-[450px] lg:h-[550px] shrink-0">
+                            <div id="estruturais-main" class="col-span-2 row-span-1 overflow-hidden rounded-md shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-amber-500/30 bg-zinc-900 relative transition-all hover:scale-[1.02] z-20">
+                                <div class="absolute inset-0 bg-zinc-900/20 pointer-events-none"></div>
+                            </div>
+                            <div id="estruturais-detail1" class="col-span-1 row-span-1 overflow-hidden rounded-md shadow-xl border border-zinc-800 bg-zinc-900 relative transition-all hover:scale-[1.02] z-10">
+                                <div class="absolute inset-0 bg-zinc-900/40 pointer-events-none"></div>
+                            </div>
+                            <div id="estruturais-detail2" class="col-span-1 row-span-1 overflow-hidden rounded-md shadow-xl border border-zinc-800 bg-zinc-900 relative transition-all hover:scale-[1.02] z-10">
+                                <div class="absolute inset-0 bg-zinc-900/40 pointer-events-none"></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 flex flex-col justify-center">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 bg-zinc-900 border border-amber-500/40 shrink-0 flex items-center justify-center rounded-sm">
+                                    <i data-lucide="layers" class="w-6 h-6 text-amber-400"></i>
+                                </div>
+                                <h3 class="text-3xl font-vintage font-bold text-white uppercase" data-i18n="proj_est_title">Projetos Estruturais</h3>
+                            </div>
+                            <h4 class="text-amber-500 font-classic text-sm uppercase tracking-widest font-bold mb-4" data-i18n="proj_resumo">Resumo Técnico</h4>
+                            <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify mb-6" data-i18n="proj_est_p1">
+                                Minha vivência em estruturas metálicas é marcada pela participação direta no desenvolvimento e detalhamento técnico de um barracão industrial. Atuei em todo o processo, desde a concepção do projeto executivo até a geração das listas de materiais e desenhos de fabricação.
+                            </p>
+                            <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify" data-i18n="proj_est_p2">
+                                Além do trabalho de escritório, realizei o acompanhamento da montagem em campo, garantindo que o detalhamento técnico fosse seguido à risca e que os ajustes necessários fossem feitos com rapidez, assegurando a integridade e a exatidão da estrutura final.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: CONTATO (FOOTER) -->
+        <section id="contato" class="w-full border-t border-amber-500/40 shadow-[inset_0_1px_20px_rgba(245,158,11,0.1)] bg-[#0a0a0a] py-20 px-6 sm:px-8 relative overflow-hidden">
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[40%] rounded-t-[100%] bg-amber-500/5 blur-[80px] pointer-events-none"></div>
+            
+            <div class="max-w-4xl mx-auto flex flex-col items-center justify-center text-center relative z-10">
+                <div class="w-16 h-16 border-2 border-amber-500/80 rotate-45 flex items-center justify-center mb-10 mx-auto shadow-[0_0_30px_rgba(245,158,11,0.2)] bg-[#050505]">
+                    <span class="text-2xl font-vintage text-amber-400 -rotate-45 block font-bold">LF</span>
+                </div>
+                
+                <h2 class="text-3xl sm:text-4xl font-vintage font-bold text-white mb-12 uppercase tracking-wide" data-i18n="cont_title">Vamos construir algo juntos?</h2>
+                
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-8 w-full text-left">
+                    <a href="https://wa.me/5541987367171?text=Ol%C3%A1%2C%20te%20encontrei%20pelo%20seu%20portif%C3%B3lio" target="_blank" class="flex items-center gap-5 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-amber-400 hover:bg-zinc-900 transition-all group sm:w-[calc(50%-1rem)]">
+                        <div class="w-12 h-12 bg-[#050505] border border-amber-500/40 flex shrink-0 items-center justify-center rounded-full group-hover:bg-amber-500/10 transition-colors">
+                            <i data-lucide="phone" class="w-5 h-5 text-amber-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase text-slate-400 mb-1">WhatsApp</p>
+                            <p class="text-base text-white font-classic tracking-wider group-hover:text-amber-400 transition-colors">+55 (41) 98736-7171</p>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:Duarte.luizfer@gmail.com" class="flex items-center gap-5 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-amber-400 hover:bg-zinc-900 transition-all group sm:w-[calc(50%-1rem)]">
+                        <div class="w-12 h-12 bg-[#050505] border border-amber-500/40 flex shrink-0 items-center justify-center rounded-full group-hover:bg-amber-500/10 transition-colors">
+                            <i data-lucide="mail" class="w-5 h-5 text-amber-400"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-[10px] font-bold uppercase text-slate-400 mb-1" data-i18n="cont_email">E-mail Profissional</p>
+                            <p class="text-sm sm:text-base text-white font-classic tracking-wider truncate group-hover:text-amber-400 transition-colors">Duarte.luizfer@gmail.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/luiz-fernando-duarte-120972206/" target="_blank" class="flex items-center gap-5 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-amber-400 hover:bg-zinc-900 transition-all group sm:w-[calc(50%-1rem)]">
+                        <div class="w-12 h-12 bg-[#050505] border border-amber-500/40 flex shrink-0 items-center justify-center rounded-full group-hover:bg-amber-500/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-amber-400"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-[10px] font-bold uppercase text-slate-400 mb-1" data-i18n="cont_net">Rede Profissional</p>
+                            <p class="text-sm sm:text-base text-white font-classic tracking-wider truncate group-hover:text-amber-400 transition-colors">/luiz-fernando-duarte</p>
+                        </div>
+                    </a>
+                    
+                    <div class="flex items-center gap-5 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800 sm:w-[calc(50%-1rem)]">
+                        <div class="w-12 h-12 bg-[#050505] border border-amber-500/40 flex shrink-0 items-center justify-center rounded-full">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-amber-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase text-slate-400 mb-1" data-i18n="cont_loc">Localidade</p>
+                            <p class="text-base text-white font-classic tracking-wider">Curitiba - PR</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="mt-16 text-xs text-slate-500 font-classic uppercase tracking-widest border-t border-zinc-800 pt-6 w-full" data-i18n="cont_rights">© 2024 Luiz Fernando Duarte Santos. Todos os direitos reservados.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPTS, CONFIGURAÇÕES E TRADUÇÕES -->
+    <script>
+        lucide.createIcons();
+
+        // CONFIGURAÇÃO DE IMAGENS
+        const myImages = {
+            profilePicture: "Fotos/LUIZ.jpeg",
+            mecanicos: { main: "Fotos/MECANICA 1.jpeg", detail1: "Fotos/MECANICA 2.jpeg", detail2: "Fotos/MECANICA 3.jpg" },
+            moveleiros: { main: "Fotos/MOVELEIRO 1.jpeg", detail1: "Fotos/MOVELEIRO 2.jpeg", detail2: "Fotos/MOVELEIRO 3.jpeg" },
+            estruturais: { main: "Fotos/BARRACAO 1.jpeg", detail1: "Fotos/BARRACAO 2.jpeg", detail2: "Fotos/BARRACAO 3.jpeg" },
+            instituicoes: { cep: "Fotos/CEP.jpg", unicuritiba: "Fotos/UNICURITIBA.jpg", ufpr: "Fotos/UFPR.jpg" }
+        };
+
+        function applyImage(elementId, imageUrl, isCover = false) {
+            if (!imageUrl) return; 
+            const container = document.getElementById(elementId);
+            if (container) {
+                const imgClass = isCover 
+                    ? "absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 hover:scale-105 pointer-events-auto" 
+                    : "absolute inset-0 w-full h-full object-cover bg-[#080808] z-0 transition-transform duration-700 hover:scale-105 pointer-events-auto opacity-80 hover:opacity-100";
+                container.innerHTML = `<img src="${imageUrl}" class="${imgClass}" alt="Imagem">`;
+            }
+        }
+
+        // DICIONÁRIO DE TRADUÇÕES
+        const i18n = {
+            pt: {
+                nav_title: "Engenharia Mecânica",
+                nav_home: "Início", nav_about: "Sobre", nav_qual: "Qualificações", nav_proj: "Projetos", nav_contact: "Contato",
+                hero_photo: "Sua Foto", hero_role: "Engenheiro Mecânico", hero_reg: "Registro Profissional", hero_scroll: "Role para baixo",
+                about_title: "Síntese Profissional",
+                about_p1: '<span class="text-amber-400 font-vintage text-4xl float-left mr-2 leading-none mt-1">E</span>ngenheiro Mecânico formado pela UniCuritiba e pós-graduando em Engenharia da Qualidade 4.0 pela Universidade Federal do Paraná (UFPR). Com trajetória consolidada no desenvolvimento e gestão de projetos desde 2021, possuo experiência multissetorial na entrega de soluções de engenharia de alta complexidade.',
+                about_p2: 'No setor moveleiro, atuei na viabilização técnica e produtiva de mobiliário corporativo de alto padrão, atendendo a rigorosos critérios de qualidade para marcas de grande expressão nacional, como Madero, Bob’s e Coco Bambu.',
+                about_p3: 'Atualmente, minha atuação está concentrada no setor metalmecânico, onde sou responsável pelo desenvolvimento e viabilização de componentes que envolvem processos de corte a laser, dobra e usinagem. Desenvolvo projetos técnicos para organizações líderes em seus segmentos, como Volvo, Horsch e Petrobras.',
+                about_p4: 'Minha abordagem profissional une o domínio técnico em softwares de modelagem e detalhamento à visão estratégica da Engenharia da Qualidade, focando sempre na otimização de recursos e na excelência técnica dos projetos executados.',
+                qual_edu_title: "Formação Acadêmica",
+                edu_hs_level: "Ensino Médio", edu_hs_title: "Ensino Médio Regular", edu_hs_status: "Status: Concluído em 2020",
+                edu_ug_level: "Graduação", edu_ug_title: "Engenharia Mecânica", edu_ug_status: "Status: Concluído em 2025",
+                edu_pg_level: "Pós-Graduação", edu_pg_title: "Eng. da Qualidade & Black Belt", edu_pg_status: "Status: Em andamento (Prev. 2028)",
+                qual_cert_title: "Cursos e Especializações", qual_cert_sub: "Domínio de Softwares e Cálculos Estruturais", qual_cert_plat: "Plataforma:",
+                qual_lang_title: "Idiomas",
+                proj_title: "Portfólio de Projetos", proj_sub: "Galeria técnica com estudos de caso, detalhamentos e renderizações de projetos desenvolvidos para diferentes setores industriais.",
+                proj_mec_title: "Projetos Mecânicos", proj_mov_title: "Projetos Moveleiros", proj_est_title: "Projetos Estruturais",
+                proj_resumo: "Resumo Técnico",
+                proj_mec_p1: "Atualmente, meu foco está no desenvolvimento técnico de componentes e na melhoria contínua do chão de fábrica. No dia a dia, projeto peças complexas utilizando softwares de modelagem 3D, garantindo que cada geometria atenda às exigências de esforço e funcionalidade.",
+                proj_mec_p2: "Minha vivência vai além do computador: acompanho de perto a produção para identificar gargalos e implementar melhorias nos processos. Trabalho para que o projeto saia do papel de forma otimizada, reduzindo desperdícios e garantindo que a manufatura seja ágil e precisa.",
+                proj_mov_p1: "Neste setor, minha experiência foi pautada pela transformação de conceitos em produtos reais e viáveis. Atuei diretamente no ciclo de desenvolvimento, desde o refinamento do design até a entrega final.",
+                proj_mov_p2: "Minha principal responsabilidade era a prototipagem e a validação técnica: eu acompanhava a construção dos primeiros modelos físicos para testar encaixes, resistência de materiais e facilidade de montagem. Essa vivência prática permitia ajustar detalhes críticos antes da produção em larga escala.",
+                proj_est_p1: "Minha vivência em estruturas metálicas é marcada pela participação direta no desenvolvimento e detalhamento técnico de um barracão industrial. Atuei em todo o processo, desde a concepção do projeto executivo até a geração das listas de materiais e desenhos de fabricação.",
+                proj_est_p2: "Além do trabalho de escritório, realizei o acompanhamento da montagem em campo, garantindo que o detalhamento técnico fosse seguido à risca e que os ajustes necessários fossem feitos com rapidez, assegurando a integridade e a exatidão da estrutura final.",
+                cont_title: "Vamos construir algo juntos?", cont_email: "E-mail Profissional", cont_net: "Rede Profissional", cont_loc: "Localidade", cont_rights: "© 2024 Luiz Fernando Duarte Santos. Todos os direitos reservados."
+            },
+            en: {
+                nav_title: "Mechanical Engineering",
+                nav_home: "Home", nav_about: "About", nav_qual: "Qualifications", nav_proj: "Projects", nav_contact: "Contact",
+                hero_photo: "Your Photo", hero_role: "Mechanical Engineer", hero_reg: "Professional License", hero_scroll: "Scroll down",
+                about_title: "Professional Summary",
+                about_p1: '<span class="text-amber-400 font-vintage text-4xl float-left mr-2 leading-none mt-1">M</span>echanical Engineer graduated from UniCuritiba and post-graduating in Quality Engineering 4.0 from the Federal University of Paraná (UFPR). With a solid background in project development and management since 2021, I have multisectoral experience delivering highly complex engineering solutions.',
+                about_p2: 'In the furniture sector, I worked on the technical and productive viability of high-end corporate furniture, meeting strict quality criteria for major national brands, such as Madero, Bob’s, and Coco Bambu.',
+                about_p3: 'Currently, my work is concentrated in the metal-mechanic sector, where I am responsible for the development and viability of components involving laser cutting, bending, and machining processes. I develop technical projects for leading organizations in their segments, such as Volvo, Horsch, and Petrobras.',
+                about_p4: 'My professional approach combines technical expertise in modeling and detailing software with the strategic vision of Quality Engineering, always focusing on resource optimization and the technical excellence of executed projects.',
+                qual_edu_title: "Academic Background",
+                edu_hs_level: "High School", edu_hs_title: "Regular High School", edu_hs_status: "Status: Completed in 2020",
+                edu_ug_level: "Bachelor's Degree", edu_ug_title: "Mechanical Engineering", edu_ug_status: "Status: Completed in 2025",
+                edu_pg_level: "Post-Graduation", edu_pg_title: "Quality Eng. & Black Belt", edu_pg_status: "Status: In progress (Est. 2028)",
+                qual_cert_title: "Courses & Specializations", qual_cert_sub: "Software Proficiency & Structural Calculations", qual_cert_plat: "Platform:",
+                qual_lang_title: "Languages",
+                proj_title: "Projects Portfolio", proj_sub: "Technical gallery with case studies, detailing, and rendering of projects developed for different industrial sectors.",
+                proj_mec_title: "Mechanical Projects", proj_mov_title: "Furniture Projects", proj_est_title: "Structural Projects",
+                proj_resumo: "Technical Summary",
+                proj_mec_p1: "Currently, my focus is on the technical development of components and continuous improvement on the factory floor. Day to day, I design complex parts using 3D modeling software, ensuring each geometry meets effort and functional requirements.",
+                proj_mec_p2: "My experience goes beyond the computer: I closely monitor production to identify bottlenecks and implement process improvements. I work so the project moves from paper to reality optimally, reducing waste and ensuring agile and precise manufacturing.",
+                proj_mov_p1: "In this sector, my experience was based on transforming concepts into real and viable products. I worked directly in the development cycle, from design refinement to final delivery.",
+                proj_mov_p2: "My main responsibility was prototyping and technical validation: I followed the construction of the first physical models to test fittings, material resistance, and assembly ease. This practical experience allowed me to adjust critical details before large-scale production.",
+                proj_est_p1: "My experience in metallic structures is marked by direct participation in the development and technical detailing of an industrial shed. I worked in the entire process, from executive project conception to generating material lists and manufacturing drawings.",
+                proj_est_p2: "Besides office work, I monitored field assembly, ensuring technical detailing was strictly followed and necessary adjustments were made quickly, assuring the integrity and accuracy of the final structure.",
+                cont_title: "Let's build something together?", cont_email: "Professional E-mail", cont_net: "Professional Network", cont_loc: "Location", cont_rights: "© 2024 Luiz Fernando Duarte Santos. All rights reserved."
+            },
+            es: {
+                nav_title: "Ingeniería Mecánica",
+                nav_home: "Inicio", nav_about: "Sobre mí", nav_qual: "Calificaciones", nav_proj: "Proyectos", nav_contact: "Contacto",
+                hero_photo: "Tu Foto", hero_role: "Ingeniero Mecánico", hero_reg: "Registro Profesional", hero_scroll: "Desplácese hacia abajo",
+                about_title: "Resumen Profesional",
+                about_p1: '<span class="text-amber-400 font-vintage text-4xl float-left mr-2 leading-none mt-1">I</span>ngeniero Mecánico graduado por la UniCuritiba y cursando posgrado en Ingeniería de la Calidad 4.0 en la Universidad Federal de Paraná (UFPR). Con una sólida trayectoria en desarrollo y gestión de proyectos desde 2021, tengo experiencia multisectorial entregando soluciones de ingeniería de alta complejidad.',
+                about_p2: 'En el sector de muebles, trabajé en la viabilidad técnica y productiva de mobiliario corporativo de alta gama, cumpliendo con estrictos criterios de calidad para grandes marcas nacionales, como Madero, Bob’s y Coco Bambu.',
+                about_p3: 'Actualmente, mi trabajo se concentra en el sector metalmecánico, donde soy responsable del desarrollo y viabilidad de componentes que involucran procesos de corte por láser, plegado y mecanizado. Desarrollo proyectos técnicos para organizaciones líderes en sus segmentos, como Volvo, Horsch y Petrobras.',
+                about_p4: 'Mi enfoque profesional combina el dominio técnico en software de modelado y detallado con la visión estratégica de la Ingeniería de la Calidad, siempre enfocándome en la optimización de recursos y la excelencia técnica de los proyectos ejecutados.',
+                qual_edu_title: "Formación Académica",
+                edu_hs_level: "Educación Secundaria", edu_hs_title: "Secundaria Regular", edu_hs_status: "Estado: Concluido en 2020",
+                edu_ug_level: "Grado", edu_ug_title: "Ingeniería Mecánica", edu_ug_status: "Estado: Concluido en 2025",
+                edu_pg_level: "Posgrado", edu_pg_title: "Ing. de Calidad y Black Belt", edu_pg_status: "Estado: En curso (Prev. 2028)",
+                qual_cert_title: "Cursos y Especializaciones", qual_cert_sub: "Dominio de Software y Cálculos Estructurales", qual_cert_plat: "Plataforma:",
+                qual_lang_title: "Idiomas",
+                proj_title: "Portafolio de Proyectos", proj_sub: "Galería técnica con estudios de caso, detallado y renderizado de proyectos desarrollados para diferentes sectores industriales.",
+                proj_mec_title: "Proyectos Mecánicos", proj_mov_title: "Proyectos de Mobiliario", proj_est_title: "Proyectos Estructurales",
+                proj_resumo: "Resumen Técnico",
+                proj_mec_p1: "Actualmente, mi enfoque es el desarrollo técnico de componentes y la mejora continua en la planta. En el día a día, diseño piezas complejas utilizando software de modelado 3D, asegurando que cada geometría cumpla con los requisitos de esfuerzo y funcionalidad.",
+                proj_mec_p2: "Mi experiencia va más allá de la computadora: superviso de cerca la producción para identificar cuellos de botella e implementar mejoras en los procesos. Trabajo para que el proyecto pase del papel a la realidad de manera óptima, reduciendo desperdicios y asegurando una fabricación ágil y precisa.",
+                proj_mov_p1: "En este sector, mi experiencia se basó en transformar conceptos en productos reales y viables. Trabajé directamente en el ciclo de desarrollo, desde el refinamiento del diseño hasta la entrega final.",
+                proj_mov_p2: "Mi responsabilidad principal fue la creación de prototipos y la validación técnica: seguí la construcción de los primeros modelos físicos para probar ajustes, resistencia de materiales y facilidad de montaje. Esta experiencia práctica me permitió ajustar detalles críticos antes de la producción a gran escala.",
+                proj_est_p1: "Mi experiencia en estructuras metálicas está marcada por mi participación directa en el desarrollo y detallado técnico de un galpón industrial. Trabajé en todo el proceso, desde la concepción del proyecto ejecutivo hasta la generación de listas de materiales y planos de fabricación.",
+                proj_est_p2: "Además del trabajo de oficina, supervisé el montaje en campo, asegurando que el detallado técnico se siguiera estrictamente y que los ajustes necesarios se hicieran rápidamente, asegurando la integridad y precisión de la estructura final.",
+                cont_title: "¿Construyamos algo juntos?", cont_email: "Correo Profesional", cont_net: "Red Profesional", cont_loc: "Ubicación", cont_rights: "© 2024 Luiz Fernando Duarte Santos. Todos los derechos reservados."
+            }
+        };
+
+        // DADOS DE CURSOS E IDIOMAS (Traduzíveis)
+        const coursesData = {
+            pt: [
+                { title: "Solidworks", platform: "Udemy", desc: "Modelagem 3D, montagem e detalhamento." },
+                { title: "AutoCAD 2D e 3D", platform: "Udemy", desc: "Desenho técnico assistido por computador." },
+                { title: "Excel Avançado", platform: "Udemy", desc: "Automação e dashboards estratégicos." },
+                { title: "Solidworks Simulation", platform: "Udemy", desc: "Análise de Elementos Finitos (FEA)." },
+                { title: "Tekla Structure", platform: "Udemy", desc: "Modelagem de estruturas metálicas (BIM)." },
+                { title: "Calculista Estrutural", platform: "Udemy", desc: "Dimensionamento e verificação de esforços." },
+                { title: "Fusion 360", platform: "Corp.", desc: "Domínio de CAD/CAM integrado." },
+                { title: "Fusion 360 Manufatura", platform: "Corp.", desc: "Programação de usinagem (CAM)." }
+            ],
+            en: [
+                { title: "Solidworks", platform: "Udemy", desc: "3D modeling, assembly, and detailing." },
+                { title: "AutoCAD 2D & 3D", platform: "Udemy", desc: "Computer-aided technical drawing." },
+                { title: "Advanced Excel", platform: "Udemy", desc: "Automation and strategic dashboards." },
+                { title: "Solidworks Simulation", platform: "Udemy", desc: "Finite Element Analysis (FEA)." },
+                { title: "Tekla Structure", platform: "Udemy", desc: "Steel structure modeling (BIM)." },
+                { title: "Structural Calculator", platform: "Udemy", desc: "Sizing and stress verification." },
+                { title: "Fusion 360", platform: "Corp.", desc: "Integrated CAD/CAM mastery." },
+                { title: "Fusion 360 Manufacturing", platform: "Corp.", desc: "Machining programming (CAM)." }
+            ],
+            es: [
+                { title: "Solidworks", platform: "Udemy", desc: "Modelado 3D, ensamblaje y detallado." },
+                { title: "AutoCAD 2D y 3D", platform: "Udemy", desc: "Dibujo técnico asistido por ordenador." },
+                { title: "Excel Avanzado", platform: "Udemy", desc: "Automatización y dashboards estratégicos." },
+                { title: "Solidworks Simulation", platform: "Udemy", desc: "Análisis de Elementos Finitos (FEA)." },
+                { title: "Tekla Structure", platform: "Udemy", desc: "Modelado de estructuras metálicas (BIM)." },
+                { title: "Calculista Estructural", platform: "Udemy", desc: "Dimensionamiento y verificación de esfuerzos." },
+                { title: "Fusion 360", platform: "Corp.", desc: "Dominio de CAD/CAM integrado." },
+                { title: "Fusion 360 Manufactura", platform: "Corp.", desc: "Programación de mecanizado (CAM)." }
+            ]
+        };
+
+        const langsData = {
+            pt: [
+                { name: "Português", level: "Nativo", desc: "Domínio completo e fluência natural.", filled: 5 },
+                { name: "Inglês", level: "Intermediário", desc: "Compreensão, leitura e escrita técnica.", filled: 3 },
+                { name: "Espanhol", level: "Básico", desc: "Vivência prática em intercâmbio (Vôlei).", filled: 2 }
+            ],
+            en: [
+                { name: "Portuguese", level: "Native", desc: "Complete mastery and natural fluency.", filled: 5 },
+                { name: "English", level: "Intermediate", desc: "Technical comprehension, reading, and writing.", filled: 3 },
+                { name: "Spanish", level: "Basic", desc: "Practical experience in exchange program.", filled: 2 }
+            ],
+            es: [
+                { name: "Portugués", level: "Nativo", desc: "Dominio completo y fluidez natural.", filled: 5 },
+                { name: "Inglés", level: "Intermedio", desc: "Comprensión, lectura y escritura técnica.", filled: 3 },
+                { name: "Español", level: "Básico", desc: "Experiencia práctica de intercambio.", filled: 2 }
+            ]
+        };
+
+        // FUNÇÃO DE TRADUÇÃO
+        function setLanguage(lang) {
+            // 1. Atualizar Textos Fixos
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(i18n[lang] && i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+
+            // 2. Atualizar Botões Visuais
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('text-amber-400', 'bg-zinc-800');
+                btn.classList.add('text-slate-400');
+            });
+            const activeBtn = document.querySelector(`.${lang}-btn`);
+            if(activeBtn) {
+                activeBtn.classList.add('text-amber-400', 'bg-zinc-800');
+                activeBtn.classList.remove('text-slate-400');
+            }
+
+            // 3. Renderizar Cursos Dinamicamente
+            const coursesContainer = document.getElementById('courses-container');
+            const platLabel = i18n[lang].qual_cert_plat;
+            coursesContainer.innerHTML = coursesData[lang].map(c => `
+                <div class="bg-zinc-900/30 border border-zinc-800/80 rounded p-5 hover:border-amber-500/40 transition-colors flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center shrink-0">
+                            <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                        <h3 class="font-vintage text-base text-white leading-tight font-bold">${c.title}</h3>
+                    </div>
+                    <p class="font-classic text-xs text-slate-400 leading-relaxed mb-4 flex-1">${c.desc}</p>
+                    <span class="text-[9px] text-zinc-500 uppercase tracking-widest font-bold block pt-3 border-t border-zinc-800/80">${platLabel} ${c.platform}</span>
+                </div>
+            `).join('');
+            lucide.createIcons(); // Recarrega os icones criados no innerHTML
+
+            // 4. Renderizar Idiomas Dinamicamente
+            const langsContainer = document.getElementById('langs-container');
+            langsContainer.innerHTML = langsData[lang].map(l => {
+                let dotsHtml = '';
+                for(let i=0; i<5; i++){
+                    dotsHtml += `<div class="w-3 h-3 rounded-full border border-zinc-700 ${i < l.filled ? 'bg-amber-500 border-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]' : 'bg-zinc-900'}"></div>`;
+                }
+                return `
+                    <div class="flex flex-col items-center text-center">
+                        <h3 class="font-vintage text-2xl text-white mb-1">${l.name}</h3>
+                        <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest mb-4">${l.level}</p>
+                        <div class="flex justify-center gap-2 mb-4">${dotsHtml}</div>
+                        <p class="font-classic text-sm text-slate-400">${l.desc}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // CARREGAMENTO INICIAL
+        window.addEventListener('DOMContentLoaded', () => {
+            // Carrega imagens
+            applyImage('profile-pic-container', myImages.profilePicture, true);
+            applyImage('edu-cep', myImages.instituicoes.cep, true);
+            applyImage('edu-uni', myImages.instituicoes.unicuritiba, true);
+            applyImage('edu-ufpr', myImages.instituicoes.ufpr, true);
+            applyImage('mecanicos-main', myImages.mecanicos.main, true);
+            applyImage('mecanicos-detail1', myImages.mecanicos.detail1, true);
+            applyImage('mecanicos-detail2', myImages.mecanicos.detail2, true);
+            applyImage('moveleiros-main', myImages.moveleiros.main, true);
+            applyImage('moveleiros-detail1', myImages.moveleiros.detail1, true);
+            applyImage('moveleiros-detail2', myImages.moveleiros.detail2, true);
+            applyImage('estruturais-main', myImages.estruturais.main, true);
+            applyImage('estruturais-detail1', myImages.estruturais.detail1, true);
+            applyImage('estruturais-detail2', myImages.estruturais.detail2, true);
+
+            // Carrega a linguagem padrão (Português)
+            setLanguage('pt');
+        });
+    </script>
+</body>
+</html>
