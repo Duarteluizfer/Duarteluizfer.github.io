@@ -311,7 +311,7 @@
                                 Neste setor, minha experiência foi pautada pela transformação de conceitos em produtos reais e viáveis. Atuei diretamente no ciclo de desenvolvimento, desde o refinamento do design até a entrega final. 
                             </p>
                             <p class="text-slate-300 font-classic text-base leading-[1.8] text-justify" data-i18n="proj_mov_p2">
-                                Minha principal responsabilidade era a prototipagem e a validação técnica: eu acompanhava a construção dos primeiros modelos físicos para testar encaixes, resistência de materiales e facilidade de montagem. Essa vivência prática permitia ajustar detalhes críticos antes da produção em larga escala.
+                                Minha principal responsabilidade era a prototipagem e a validação técnica: eu acompanhava a construção dos primeiros modelos físicos para testar encaixes, resistência de materiais e facilidade de montagem. Essa vivência prática permitia ajustar detalhes críticos antes da produção em larga escala.
                             </p>
                         </div>
                     </div>
@@ -409,19 +409,79 @@
             </div>
         </section>
 
+        <!-- MODAL DE CURSO (Pop-up) -->
+        <div id="course-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+            <!-- Fundo escuro (Backdrop) -->
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" onclick="closeCourseModal()"></div>
+            
+            <!-- Conteúdo do Modal -->
+            <div class="relative bg-zinc-900 border border-amber-500/30 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.8)] w-full max-w-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="course-modal-content">
+                
+                <!-- Cabeçalho do Modal -->
+                <div class="p-6 sm:p-8 bg-zinc-900/50 border-b border-zinc-800 flex items-start gap-6 relative">
+                    
+                    <!-- Container da Logo do Software/App no Modal -->
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-lg bg-[#050505] border border-amber-500/20 p-2 flex items-center justify-center shadow-inner overflow-hidden">
+                        <img id="modal-course-logo" src="" alt="Logo" class="w-full h-full object-contain hidden" />
+                        <i id="modal-course-icon" data-lucide="award" class="w-8 h-8 text-amber-500/50"></i>
+                    </div>
+                    
+                    <!-- Título e Plataforma -->
+                    <div class="flex-1 pt-2 pr-8">
+                        <h3 id="modal-course-title" class="font-vintage text-2xl sm:text-3xl text-white font-bold mb-2">Nome do Curso</h3>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700">
+                            <span class="text-[10px] text-amber-400 uppercase tracking-widest font-bold" id="modal-course-platform">Plataforma</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Botão Fechar -->
+                    <button onclick="closeCourseModal()" class="absolute top-4 right-4 text-slate-400 hover:text-amber-400 transition-colors p-1">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                
+                <!-- Corpo do Modal (O que foi aprendido) -->
+                <div class="p-6 sm:p-8">
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4" data-i18n="modal_learned">O que foi aprendido</h4>
+                    <div class="font-classic text-sm sm:text-base text-slate-300 leading-relaxed text-justify" id="modal-course-details">
+                        <!-- Conteúdo injetado via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- SCRIPTS, CONFIGURAÇÕES E TRADUÇÕES -->
     <script>
         lucide.createIcons();
 
-        // CONFIGURAÇÃO DE IMAGENS
+        // Variável Global de Idioma
+        let currentLanguage = 'pt';
+
+        // ==========================================
+        // 🛠️ CONFIGURAÇÃO DE IMAGENS & LOGOS
+        // ==========================================
         const myImages = {
             profilePicture: "Fotos/LUIZ.jpeg",
             mecanicos: { main: "Fotos/MECANICA 1.jpeg", detail1: "Fotos/MECANICA 2.jpeg", detail2: "Fotos/MECANICA 3.jpg" },
-            moveleiros: { main: "Fotos/MOVELEIRO 1.jpeg", detail1: "Fotos/MOVELEIRO 2.jpeg", detail2: "Fotos/MOVELEIRO 3.jpeg" },
+            moveleiros: { main: "Fotos/MOVELEIRO 4.png", detail1: "Fotos/MOVELEIRO 2.jpeg", detail2: "Fotos/MOVELEIRO 3.jpeg" },
             estruturais: { main: "Fotos/BARRACAO 1.jpeg", detail1: "Fotos/BARRACAO 2.jpeg", detail2: "Fotos/BARRACAO 3.jpeg" },
-            instituicoes: { cep: "Fotos/CEP.jpg", unicuritiba: "Fotos/UNICURITIBA.jpg", ufpr: "Fotos/UFPR.jpg" }
+            instituicoes: { cep: "Fotos/CEP.jpg", unicuritiba: "Fotos/UNICURITIBA.jpg", ufpr: "Fotos/UFPR.jpg" },
+            
+            // 📌 LOGOS DOS CURSOS (Adicione o caminho das suas logos aqui)
+            // Se você deixar em branco (""), ele gerará uma imagem automática como provisória.
+            // Exemplo: solidworks: "Fotos/logos/sw-logo.png"
+            logosCursos: {
+                solidworks: "Fotos/SOLID 2.png",
+                autocad: "Fotos/AUTOCAD 2.png",
+                excel: "Fotos/EXCEL.png",
+                simulation: "Fotos/SOLID 2.png",
+                tekla: "Fotos/TEKLA 2.png",
+                calculista: "Fotos/TEKLA 2.png",
+                fusion: "Fotos/FUSION 3.png",
+                fusionCam: "Fotos/FUSION 3.png"
+            }
         };
 
         function applyImage(elementId, imageUrl, isCover = false) {
@@ -450,7 +510,7 @@
                 edu_hs_level: "Ensino Médio", edu_hs_title: "Ensino Médio Regular", edu_hs_status: "Status: Concluído em 2020",
                 edu_ug_level: "Graduação", edu_ug_title: "Engenharia Mecânica", edu_ug_status: "Status: Concluído em 2025",
                 edu_pg_level: "Pós-Graduação", edu_pg_title: "Eng. da Qualidade & Black Belt", edu_pg_status: "Status: Em andamento (Prev. 2028)",
-                qual_cert_title: "Cursos e Especializações", qual_cert_sub: "Domínio de Softwares e Cálculos Estruturais", qual_cert_plat: "Plataforma:",
+                qual_cert_title: "Cursos e Especializações", qual_cert_sub: "Domínio de Softwares e Cálculos Estruturais - Clique para ver mais", qual_cert_plat: "Plataforma:",
                 qual_lang_title: "Idiomas",
                 proj_title: "Portfólio de Projetos", proj_sub: "Galeria técnica com estudos de caso, detalhamentos e renderizações de projetos desenvolvidos para diferentes setores industriais.",
                 proj_mec_title: "Projetos Mecânicos", proj_mov_title: "Projetos Moveleiros", proj_est_title: "Projetos Estruturais",
@@ -461,7 +521,8 @@
                 proj_mov_p2: "Minha principal responsabilidade era a prototipagem e a validação técnica: eu acompanhava a construção dos primeiros modelos físicos para testar encaixes, resistência de materiais e facilidade de montagem. Essa vivência prática permitia ajustar detalhes críticos antes da produção em larga escala.",
                 proj_est_p1: "Minha vivência em estruturas metálicas é marcada pela participação direta no desenvolvimento e detalhamento técnico de um barracão industrial. Atuei em todo o processo, desde a concepção do projeto executivo até a geração das listas de materiais e desenhos de fabricação.",
                 proj_est_p2: "Além do trabalho de escritório, realizei o acompanhamento da montagem em campo, garantindo que o detalhamento técnico fosse seguido à risca e que os ajustes necessários fossem feitos com rapidez, assegurando a integridade e a exatidão da estrutura final.",
-                cont_title: "Vamos construir algo juntos?", cont_email: "E-mail Profissional", cont_net: "Rede Profissional", cont_loc: "Localidade", cont_rights: "© 2024 Luiz Fernando Duarte Santos. Todos os direitos reservados."
+                cont_title: "Vamos construir algo juntos?", cont_email: "E-mail Profissional", cont_net: "Rede Profissional", cont_loc: "Localidade", cont_rights: "© 2024 Luiz Fernando Duarte Santos. Todos os direitos reservados.",
+                modal_learned: "O que foi aprendido"
             },
             en: {
                 nav_title: "Mechanical Engineering",
@@ -476,7 +537,7 @@
                 edu_hs_level: "High School", edu_hs_title: "Regular High School", edu_hs_status: "Status: Completed in 2020",
                 edu_ug_level: "Bachelor's Degree", edu_ug_title: "Mechanical Engineering", edu_ug_status: "Status: Completed in 2025",
                 edu_pg_level: "Post-Graduation", edu_pg_title: "Quality Eng. & Black Belt", edu_pg_status: "Status: In progress (Est. 2028)",
-                qual_cert_title: "Courses & Specializations", qual_cert_sub: "Software Proficiency & Structural Calculations", qual_cert_plat: "Platform:",
+                qual_cert_title: "Courses & Specializations", qual_cert_sub: "Software Proficiency & Structural Calculations - Click to view", qual_cert_plat: "Platform:",
                 qual_lang_title: "Languages",
                 proj_title: "Projects Portfolio", proj_sub: "Technical gallery with case studies, detailing, and rendering of projects developed for different industrial sectors.",
                 proj_mec_title: "Mechanical Projects", proj_mov_title: "Furniture Projects", proj_est_title: "Structural Projects",
@@ -487,7 +548,8 @@
                 proj_mov_p2: "My main responsibility was prototyping and technical validation: I followed the construction of the first physical models to test fittings, material resistance, and assembly ease. This practical experience allowed me to adjust critical details before large-scale production.",
                 proj_est_p1: "My experience in metallic structures is marked by direct participation in the development and technical detailing of an industrial shed. I worked in the entire process, from executive project conception to generating material lists and manufacturing drawings.",
                 proj_est_p2: "Besides office work, I monitored field assembly, ensuring technical detailing was strictly followed and necessary adjustments were made quickly, assuring the integrity and accuracy of the final structure.",
-                cont_title: "Let's build something together?", cont_email: "Professional E-mail", cont_net: "Professional Network", cont_loc: "Location", cont_rights: "© 2024 Luiz Fernando Duarte Santos. All rights reserved."
+                cont_title: "Let's build something together?", cont_email: "Professional E-mail", cont_net: "Professional Network", cont_loc: "Location", cont_rights: "© 2024 Luiz Fernando Duarte Santos. All rights reserved.",
+                modal_learned: "What was learned"
             },
             es: {
                 nav_title: "Ingeniería Mecánica",
@@ -502,7 +564,7 @@
                 edu_hs_level: "Educación Secundaria", edu_hs_title: "Secundaria Regular", edu_hs_status: "Estado: Concluido en 2020",
                 edu_ug_level: "Grado", edu_ug_title: "Ingeniería Mecánica", edu_ug_status: "Estado: Concluido en 2025",
                 edu_pg_level: "Posgrado", edu_pg_title: "Ing. de Calidad y Black Belt", edu_pg_status: "Estado: En curso (Prev. 2028)",
-                qual_cert_title: "Cursos y Especializaciones", qual_cert_sub: "Dominio de Software y Cálculos Estructurales", qual_cert_plat: "Plataforma:",
+                qual_cert_title: "Cursos y Especializaciones", qual_cert_sub: "Dominio de Software y Cálculos Estructurales - Haz clic para ver", qual_cert_plat: "Plataforma:",
                 qual_lang_title: "Idiomas",
                 proj_title: "Portafolio de Proyectos", proj_sub: "Galería técnica con estudios de caso, detallado y renderizado de proyectos desarrollados para diferentes sectores industriales.",
                 proj_mec_title: "Proyectos Mecánicos", proj_mov_title: "Proyectos de Mobiliario", proj_est_title: "Proyectos Estructurales",
@@ -513,41 +575,42 @@
                 proj_mov_p2: "Mi responsabilidad principal fue la creación de prototipos y la validación técnica: seguí la construcción de los primeros modelos físicos para probar ajustes, resistencia de materiales y facilidad de montaje. Esta experiencia práctica me permitió ajustar detalles críticos antes de la producción a gran escala.",
                 proj_est_p1: "Mi experiencia en estructuras metálicas está marcada por mi participación directa en el desarrollo y detallado técnico de un galpón industrial. Trabajé en todo el proceso, desde la concepción del proyecto ejecutivo hasta la generación de listas de materiales y planos de fabricación.",
                 proj_est_p2: "Además del trabajo de oficina, supervisé el montaje en campo, asegurando que el detallado técnico se siguiera estrictamente y que los ajustes necesarios se hicieran rápidamente, asegurando la integridad y precisión de la estructura final.",
-                cont_title: "¿Construyamos algo juntos?", cont_email: "Correo Profesional", cont_net: "Red Profesional", cont_loc: "Ubicación", cont_rights: "© 2024 Luiz Fernando Duarte Santos. Todos los derechos reservados."
+                cont_title: "¿Construyamos algo juntos?", cont_email: "Correo Profesional", cont_net: "Red Profesional", cont_loc: "Ubicación", cont_rights: "© 2024 Luiz Fernando Duarte Santos. Todos los derechos reservados.",
+                modal_learned: "Lo que se aprendió"
             }
         };
 
-        // DADOS DE CURSOS E IDIOMAS (Traduzíveis)
+        // DADOS DE CURSOS (Agora chamando o config de imagens)
         const coursesData = {
             pt: [
-                { title: "Solidworks", platform: "Udemy", desc: "Modelagem 3D, montagem e detalhamento." },
-                { title: "AutoCAD 2D e 3D", platform: "Udemy", desc: "Desenho técnico assistido por computador." },
-                { title: "Excel Avançado", platform: "Udemy", desc: "Automação e dashboards estratégicos." },
-                { title: "Solidworks Simulation", platform: "Udemy", desc: "Análise de Elementos Finitos (FEA)." },
-                { title: "Tekla Structure", platform: "Udemy", desc: "Modelagem de estruturas metálicas (BIM)." },
-                { title: "Calculista Estrutural", platform: "Udemy", desc: "Dimensionamento e verificação de esforços." },
-                { title: "Fusion 360", platform: "Corp.", desc: "Domínio de CAD/CAM integrado." },
-                { title: "Fusion 360 Manufatura", platform: "Corp.", desc: "Programação de usinagem (CAM)." }
+                { title: "Solidworks", platform: "Udemy", desc: "Modelagem 3D, montagem e detalhamento.", logoPath: myImages.logosCursos.solidworks || "https://ui-avatars.com/api/?name=SW&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Criação de esboços 2D complexos, extrusões, revoluções e cortes. Montagem de componentes com posicionamentos avançados. Geração de vistas, cortes e detalhamentos técnicos para fabricação, seguindo rigorosas normas técnicas e tolerâncias." },
+                { title: "AutoCAD 2D e 3D", platform: "Udemy", desc: "Desenho técnico assistido por computador.", logoPath: myImages.logosCursos.autocad || "https://ui-avatars.com/api/?name=AC&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Desenvolvimento de plantas, cortes e vistas isométricas. Uso avançado de layers, criação de blocos dinâmicos e aplicação de hachuras. Parametrização de desenhos e plotagem profissional em diferentes escalas e formatos de folha." },
+                { title: "Excel Avançado", platform: "Udemy", desc: "Automação e dashboards estratégicos.", logoPath: myImages.logosCursos.excel || "https://ui-avatars.com/api/?name=EX&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Criação de macros e introdução ao VBA para automação de rotinas industriais. Uso de funções avançadas (PROCV, ÍNDICE, CORRESP, SE). Desenvolvimento de dashboards interativos com tabelas e gráficos dinâmicos para tomada de decisão gerencial." },
+                { title: "Solidworks Simulation", platform: "Udemy", desc: "Análise de Elementos Finitos (FEA).", logoPath: myImages.logosCursos.simulation || "https://ui-avatars.com/api/?name=SS&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Configuração de estudos estáticos e análises de fadiga. Aplicação correta de materiais, cargas e restrições de fixação. Geração e refinamento de malhas. Interpretação de resultados como tensão de von Mises, deslocamento e fator de segurança." },
+                { title: "Tekla Structure", platform: "Udemy", desc: "Modelagem de estruturas metálicas (BIM).", logoPath: myImages.logosCursos.tekla || "https://ui-avatars.com/api/?name=TS&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Modelagem paramétrica 3D de galpões industriais, mezaninos e pipe racks. Detalhamento minucioso de ligações soldadas e parafusadas. Geração automática de listas de materiais (BOM) e pranchas detalhadas para fabricação e montagem em campo." },
+                { title: "Calculista Estrutural", platform: "Udemy", desc: "Dimensionamento e verificação de esforços.", logoPath: myImages.logosCursos.calculista || "https://ui-avatars.com/api/?name=CE&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Cálculo analítico de reações de apoio, elaboração de diagramas de esforço cortante e momento fletor. Dimensionamento de vigas, pilares e treliças metálicas sujeitas a esforços de tração, compressão e flexão, com base nas normas regulamentadoras." },
+                { title: "Fusion 360", platform: "Corp.", desc: "Domínio de CAD/CAM integrado.", logoPath: myImages.logosCursos.fusion || "https://ui-avatars.com/api/?name=F3&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Modelagem paramétrica avançada baseada em nuvem. Criação de formas orgânicas de alta complexidade. Montagem de componentes com juntas mecânicas e simulação de movimento. Renderização fotorrealista para apresentação visual de projetos." },
+                { title: "Fusion 360 Manufatura", platform: "Corp.", desc: "Programação de usinagem (CAM).", logoPath: myImages.logosCursos.fusionCam || "https://ui-avatars.com/api/?name=FM&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Configuração completa de setup de usinagem. Criação e otimização de trajetórias de fresamento 2D e 3D. Simulação visual de remoção de material, verificação de colisões ferramenta/peça e geração confiável de código G para operação de máquinas CNC." }
             ],
             en: [
-                { title: "Solidworks", platform: "Udemy", desc: "3D modeling, assembly, and detailing." },
-                { title: "AutoCAD 2D & 3D", platform: "Udemy", desc: "Computer-aided technical drawing." },
-                { title: "Advanced Excel", platform: "Udemy", desc: "Automation and strategic dashboards." },
-                { title: "Solidworks Simulation", platform: "Udemy", desc: "Finite Element Analysis (FEA)." },
-                { title: "Tekla Structure", platform: "Udemy", desc: "Steel structure modeling (BIM)." },
-                { title: "Structural Calculator", platform: "Udemy", desc: "Sizing and stress verification." },
-                { title: "Fusion 360", platform: "Corp.", desc: "Integrated CAD/CAM mastery." },
-                { title: "Fusion 360 Manufacturing", platform: "Corp.", desc: "Machining programming (CAM)." }
+                { title: "Solidworks", platform: "Udemy", desc: "3D modeling, assembly, and detailing.", logoPath: myImages.logosCursos.solidworks || "https://ui-avatars.com/api/?name=SW&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Creation of complex 2D sketches, extrusions, revolutions, and cuts. Component assembly with advanced mating. Generation of views, cross-sections, and technical detailing for manufacturing, following strict technical standards and tolerances." },
+                { title: "AutoCAD 2D & 3D", platform: "Udemy", desc: "Computer-aided technical drawing.", logoPath: myImages.logosCursos.autocad || "https://ui-avatars.com/api/?name=AC&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Development of floor plans, sections, and isometric views. Advanced use of layers, creation of dynamic blocks, and hatching. Drawing parameterization and professional plotting in different scales and sheet formats." },
+                { title: "Advanced Excel", platform: "Udemy", desc: "Automation and strategic dashboards.", logoPath: myImages.logosCursos.excel || "https://ui-avatars.com/api/?name=EX&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Creation of macros and introduction to VBA for automating industrial routines. Use of advanced functions (VLOOKUP, INDEX, MATCH, IF). Development of interactive dashboards with pivot tables and dynamic charts for managerial decision-making." },
+                { title: "Solidworks Simulation", platform: "Udemy", desc: "Finite Element Analysis (FEA).", logoPath: myImages.logosCursos.simulation || "https://ui-avatars.com/api/?name=SS&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Configuration of static studies and fatigue analysis. Correct application of materials, loads, and fixture constraints. Mesh generation and refinement. Interpretation of results such as von Mises stress, displacement, and safety factor." },
+                { title: "Tekla Structure", platform: "Udemy", desc: "Steel structure modeling (BIM).", logoPath: myImages.logosCursos.tekla || "https://ui-avatars.com/api/?name=TS&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "3D parametric modeling of industrial sheds, mezzanines, and pipe racks. Meticulous detailing of welded and bolted connections. Automatic generation of Bills of Materials (BOM) and detailed sheets for manufacturing and field assembly." },
+                { title: "Structural Calculator", platform: "Udemy", desc: "Sizing and stress verification.", logoPath: myImages.logosCursos.calculista || "https://ui-avatars.com/api/?name=CE&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Analytical calculation of support reactions, creation of shear force and bending moment diagrams. Sizing of steel beams, columns, and trusses subjected to tension, compression, and bending forces, based on regulatory standards." },
+                { title: "Fusion 360", platform: "Corp.", desc: "Integrated CAD/CAM mastery.", logoPath: myImages.logosCursos.fusion || "https://ui-avatars.com/api/?name=F3&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Advanced cloud-based parametric modeling. Creation of highly complex organic shapes. Assembly of components with mechanical joints and motion simulation. Photorealistic rendering for visual project presentation." },
+                { title: "Fusion 360 Manufacturing", platform: "Corp.", desc: "Machining programming (CAM).", logoPath: myImages.logosCursos.fusionCam || "https://ui-avatars.com/api/?name=FM&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Complete machining setup configuration. Creation and optimization of 2D and 3D milling toolpaths. Visual simulation of material removal, tool/part collision checking, and reliable generation of G-code for CNC machine operation." }
             ],
             es: [
-                { title: "Solidworks", platform: "Udemy", desc: "Modelado 3D, ensamblaje y detallado." },
-                { title: "AutoCAD 2D y 3D", platform: "Udemy", desc: "Dibujo técnico asistido por ordenador." },
-                { title: "Excel Avanzado", platform: "Udemy", desc: "Automatización y dashboards estratégicos." },
-                { title: "Solidworks Simulation", platform: "Udemy", desc: "Análisis de Elementos Finitos (FEA)." },
-                { title: "Tekla Structure", platform: "Udemy", desc: "Modelado de estructuras metálicas (BIM)." },
-                { title: "Calculista Estructural", platform: "Udemy", desc: "Dimensionamiento y verificación de esfuerzos." },
-                { title: "Fusion 360", platform: "Corp.", desc: "Dominio de CAD/CAM integrado." },
-                { title: "Fusion 360 Manufactura", platform: "Corp.", desc: "Programación de mecanizado (CAM)." }
+                { title: "Solidworks", platform: "Udemy", desc: "Modelado 3D, ensamblaje y detallado.", logoPath: myImages.logosCursos.solidworks || "https://ui-avatars.com/api/?name=SW&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Creación de bocetos 2D complejos, extrusiones, revoluciones y cortes. Ensamblaje de componentes con relaciones de posición avanzadas. Generación de vistas, cortes y detallado técnico para fabricación, siguiendo estrictas normas técnicas y tolerancias." },
+                { title: "AutoCAD 2D y 3D", platform: "Udemy", desc: "Dibujo técnico asistido por ordenador.", logoPath: myImages.logosCursos.autocad || "https://ui-avatars.com/api/?name=AC&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Desarrollo de planos, secciones y vistas isométricas. Uso avanzado de capas, creación de bloques dinámicos y sombreados. Parametrización de dibujos y trazado profesional en diferentes escalas y formatos de hoja." },
+                { title: "Excel Avançado", platform: "Udemy", desc: "Automatización y dashboards estratégicos.", logoPath: myImages.logosCursos.excel || "https://ui-avatars.com/api/?name=EX&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Creación de macros e introducción a VBA para la automatización de rutinas industriales. Uso de funciones avanzadas (BUSCARV, INDICE, COINCIDIR, SI). Desarrollo de dashboards interactivos con tablas dinámicas y gráficos para la toma de decisiones gerenciales." },
+                { title: "Solidworks Simulation", platform: "Udemy", desc: "Análisis de Elementos Finitos (FEA).", logoPath: myImages.logosCursos.simulation || "https://ui-avatars.com/api/?name=SS&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Configuración de estudios estáticos y análisis de fatiga. Aplicación correcta de materiales, cargas y restricciones de fijación. Generación y refinamiento de mallas. Interpretación de resultados como tensión de von Mises, desplazamiento y factor de seguridad." },
+                { title: "Tekla Structure", platform: "Udemy", desc: "Modelado de estructuras metálicas (BIM).", logoPath: myImages.logosCursos.tekla || "https://ui-avatars.com/api/?name=TS&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Modelado paramétrico 3D de naves industriales, entrepisos y pipe racks. Detallado minucioso de conexiones soldadas y atornilladas. Generación automática de listas de materiales (BOM) y planos detallados para fabricación y montaje en campo." },
+                { title: "Calculista Estructural", platform: "Udemy", desc: "Dimensionamiento y verificación de esfuerzos.", logoPath: myImages.logosCursos.calculista || "https://ui-avatars.com/api/?name=CE&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Cálculo analítico de reacciones de apoyo, creación de diagramas de fuerza cortante y momento flector. Dimensionamiento de vigas, columnas y cerchas de acero sometidas a fuerzas de tracción, compresión y flexión, con base en normas reglamentarias." },
+                { title: "Fusion 360", platform: "Corp.", desc: "Dominio de CAD/CAM integrado.", logoPath: myImages.logosCursos.fusion || "https://ui-avatars.com/api/?name=F3&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Modelado paramétrico avanzado basado en la nube. Creación de formas orgánicas de gran complejidad. Ensamblaje de componentes con uniones mecánicas y simulación de movimiento. Renderizado fotorrealista para presentación visual de proyectos." },
+                { title: "Fusion 360 Manufactura", platform: "Corp.", desc: "Programación de mecanizado (CAM).", logoPath: myImages.logosCursos.fusionCam || "https://ui-avatars.com/api/?name=FM&background=18181b&color=f59e0b&font-size=0.4&bold=true", details: "Configuración completa del setup de mecanizado. Creación y optimización de trayectorias de fresado 2D y 3D. Simulación visual de remoción de material, comprobación de colisiones herramienta/pieza y generación confiable de código G para operación de máquinas CNC." }
             ]
         };
 
@@ -571,6 +634,8 @@
 
         // FUNÇÃO DE TRADUÇÃO
         function setLanguage(lang) {
+            currentLanguage = lang; // Salva o idioma atual
+
             // 1. Atualizar Textos Fixos
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -590,14 +655,21 @@
                 activeBtn.classList.remove('text-slate-400');
             }
 
-            // 3. Renderizar Cursos Dinamicamente
+            // 3. Renderizar Cursos Dinamicamente (Agora renderizando a Logo no Card)
             const coursesContainer = document.getElementById('courses-container');
             const platLabel = i18n[lang].qual_cert_plat;
-            coursesContainer.innerHTML = coursesData[lang].map(c => `
-                <div class="bg-zinc-900/30 border border-zinc-800/80 rounded p-5 hover:border-amber-500/40 transition-colors flex flex-col h-full">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center shrink-0">
-                            <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+            coursesContainer.innerHTML = coursesData[lang].map((c, index) => `
+                <div onclick="openCourseModal(${index})" class="bg-zinc-900/30 border border-zinc-800/80 rounded p-5 hover:border-amber-500/40 hover:bg-zinc-900/60 hover:scale-[1.02] transition-all cursor-pointer flex flex-col h-full group shadow-md hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] relative">
+                    <!-- Icone de click -->
+                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="external-link" class="w-4 h-4 text-amber-500/50"></i>
+                    </div>
+
+                    <div class="flex items-center gap-3 mb-3 pr-6">
+                        <!-- Imagem da logo no CARD principal -->
+                        <div class="w-10 h-10 rounded-md bg-[#050505] overflow-hidden flex items-center justify-center shrink-0 border border-zinc-700/80 group-hover:border-amber-500/30 transition-all p-1">
+                            <img src="${c.logoPath}" alt="${c.title}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"/>
+                            <i data-lucide="award" class="w-5 h-5 text-amber-400 hidden"></i>
                         </div>
                         <h3 class="font-vintage text-base text-white leading-tight font-bold">${c.title}</h3>
                     </div>
@@ -623,6 +695,66 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        // ==========================================
+        // FUNÇÕES DO MODAL DE CURSOS
+        // ==========================================
+        function openCourseModal(index) {
+            // Pega o curso selecionado na linguagem atual
+            const course = coursesData[currentLanguage][index];
+            
+            // Popula os dados textuais do Modal
+            document.getElementById('modal-course-title').textContent = course.title;
+            document.getElementById('modal-course-platform').textContent = course.platform;
+            document.getElementById('modal-course-details').innerHTML = course.details;
+            
+            // Gerencia a imagem de Logo do App
+            const logoEl = document.getElementById('modal-course-logo');
+            const iconEl = document.getElementById('modal-course-icon');
+            
+            if (course.logoPath && course.logoPath.trim() !== "") {
+                logoEl.src = course.logoPath;
+                logoEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+            } else {
+                logoEl.classList.add('hidden');
+                iconEl.classList.remove('hidden');
+            }
+            
+            // Exibe o Modal com Animação
+            const modal = document.getElementById('course-modal');
+            const content = document.getElementById('course-modal-content');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Pequeno delay para a transição de opacidade/escala funcionar após remover o "hidden"
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+            
+            // Trava o scroll da página de fundo
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCourseModal() {
+            const modal = document.getElementById('course-modal');
+            const content = document.getElementById('course-modal-content');
+            
+            // Animação de saída
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            
+            // Aguarda o tempo da transição para esconder de fato
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = ''; // Devolve o scroll da página
+            }, 300); // 300ms = duration-300 do Tailwind
         }
 
         // CARREGAMENTO INICIAL
